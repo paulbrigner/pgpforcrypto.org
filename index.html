@@ -57,6 +57,36 @@
     .card-sheen {
       background: linear-gradient(135deg, rgba(193, 197, 226, 0.18), rgba(250, 250, 252, 0.8));
     }
+    .hero-title-main {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.28em;
+      font-size: 2.5rem;
+      letter-spacing: normal;
+      line-height: 1.05;
+    }
+    .hero-letter {
+      letter-spacing: normal;
+    }
+    .hero-title-star {
+      letter-spacing: normal;
+      margin-left: -0.16em;
+    }
+    .hero-title-sub {
+      display: block;
+      margin-top: 0.35rem;
+      font-size: 1.5rem;
+      letter-spacing: normal;
+    }
+    @media (min-width: 768px) {
+      .hero-title-main {
+        font-size: 3.5rem;
+        gap: 0.32em;
+      }
+      .hero-title-sub {
+        font-size: 2rem;
+      }
+    }
   </style>
 </head>
 <body class="bg-brand-ice text-ink antialiased">
@@ -99,8 +129,10 @@
       <div class="mx-auto flex max-w-6xl flex-col gap-16 px-6 lg:flex-row lg:items-center">
         <div class="max-w-xl">
           <p class="section-eyebrow text-xs font-semibold uppercase text-brand-cloud/80">Monthly Briefings for Crypto Policy Leaders</p>
-          <h1 class="mt-4 text-[2.25rem] font-extrabold leading-tight md:text-[3.5rem]">PGP* <br>
-          (Pretty Good Policy) for Crypto</h1>
+          <h1 class="mt-4 font-extrabold leading-tight">
+            <span class="hero-title-main"><span class="hero-letter">P</span><span class="hero-letter">G</span><span class="hero-letter">P</span><span class="hero-title-star">*</span></span>
+            <span class="hero-title-sub">(Pretty Good Policy) for Crypto</span>
+          </h1>
           <p class="mt-6 text-lg text-brand-cloud">An initiative of the Institute for Economic Freedom, convening policymakers, privacy technologists, and advocates to advance balanced cryptocurrency frameworks.</p>
           <div class="mt-8 flex flex-col gap-3 sm:flex-row">
             <a href="#mission" class="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-brand-navy transition hover:bg-brand-cloud">Explore the Mission</a>
