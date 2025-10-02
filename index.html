@@ -15,214 +15,346 @@
         extend: {
           fontFamily: { sans: ['Inter', 'sans-serif'] },
           colors: {
-            'brand-dark': '#3a204a',
-            'brand-light': '#f8f5fa',
-            'brand-purple': '#6a4a7a',
-            'brand-accent': '#8e719e',
-            'text-dark': '#2a1a3a',
-            'text-light': '#90809a'
+            'brand-navy': '#0b0b43',
+            'brand-denim': '#4377f3',
+            'brand-lavender': '#62608c',
+            'brand-cloud': '#c1c5e2',
+            'brand-ice': '#fafafc',
+            'ink': '#14142f',
+            'muted': '#4d4f6d'
           }
         }
       }
     }
   </script>
   <style>
-    .card-gradient { background-image: linear-gradient(to top right, #ffffff, #f0eff1); }
-    .hero-bg { background-color: #3a204a; background-image: radial-gradient(circle at 15% 50%, rgba(142,113,158,0.1), transparent 30%), radial-gradient(circle at 85% 30%, rgba(142,113,158,0.08), transparent 25%); }
+    .hero-sheen {
+      background: radial-gradient(circle at 20% 20%, rgba(67, 119, 243, 0.25), transparent 50%),
+                  radial-gradient(circle at 80% -10%, rgba(193, 197, 226, 0.3), transparent 45%),
+                  #0b0b43;
+    }
+    .glow-ring {
+      position: absolute;
+      inset: -12%;
+      border-radius: 9999px;
+      background: radial-gradient(circle, rgba(67, 119, 243, 0.25), transparent 70%);
+      filter: blur(0.5px);
+      opacity: 0.9;
+      pointer-events: none;
+    }
+    .lined-heading::after {
+      content: '';
+      display: block;
+      width: 3.5rem;
+      height: 0.25rem;
+      margin: 1rem auto 0;
+      border-radius: 9999px;
+      background: linear-gradient(90deg, rgba(67, 119, 243, 1), rgba(193, 197, 226, 0.4));
+    }
+    .section-eyebrow {
+      letter-spacing: 0.3em;
+    }
+    .card-sheen {
+      background: linear-gradient(135deg, rgba(193, 197, 226, 0.18), rgba(250, 250, 252, 0.8));
+    }
   </style>
 </head>
-<body class="bg-brand-light text-text-dark antialiased">
-  <header id="header" class="bg-brand-dark/80 backdrop-blur-lg fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4">
-    <div class="container mx-auto px-6 flex justify-between items-center">
-      <a href="#" class="text-xl font-bold text-white flex items-center">
-        <img src="pgp_profile_image.png" alt="PGP Logo" class="h-8 w-auto mr-2"/>PGP*
+<body class="bg-brand-ice text-ink antialiased">
+  <header id="header" class="bg-brand-navy/85 backdrop-blur-lg fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4 shadow-lg shadow-brand-navy/20">
+    <div class="mx-auto flex max-w-6xl items-center justify-between px-6">
+      <a href="#top" class="flex items-center text-xl font-bold text-white">
+        <img src="pgp_profile_image.png" alt="PGP* for Crypto" class="mr-3 h-9 w-9 rounded-full border border-white/30 object-cover"/>
+        <span>PGP*</span>
       </a>
-      <nav class="hidden md:flex space-x-8">
-        <a href="#overview" class="text-gray-300 hover:text-white transition">Overview</a>
-        
-        <a href="#videos" class="text-gray-300 hover:text-white transition">Videos</a>
-        <a href="#project-glitch" class="text-gray-300 hover:text-white transition">Project Glitch</a>
-        <a href="#summaries" class="text-gray-300 hover:text-white transition">Summaries</a>
-		<a href="#background" class="text-gray-300 hover:text-white transition">Background</a>
-		<a href="https://community.pgpforcrypto.org" class="text-gray-300 hover:text-white transition">Member Community</a>
-		<a href="https://www.instituteforeconomicfreedom.org" target="_blank" class="text-gray-300 hover:text-white transition">IEF Home</a>
+      <nav class="hidden items-center space-x-8 text-sm font-medium uppercase tracking-[0.08em] text-brand-cloud md:flex">
+        <a href="#mission" class="hover:text-white transition">Mission</a>
+        <a href="#focus" class="hover:text-white transition">Focus Areas</a>
+        <a href="#videos" class="hover:text-white transition">Videos</a>
+        <a href="#project-glitch" class="hover:text-white transition">Project Glitch</a>
+        <a href="#summaries" class="hover:text-white transition">Summaries</a>
+        <a href="#venue" class="hover:text-white transition">Venue</a>
+        <a href="#government-notice" class="hover:text-white transition">Notice</a>
+        <a href="#background" class="hover:text-white transition">Background</a>
+        <a href="https://www.instituteforeconomicfreedom.org" target="_blank" rel="noopener noreferrer" class="hover:text-white transition">IEF Home</a>
+        <a href="https://community.pgpforcrypto.org" class="rounded-full bg-white/10 px-3 py-1 font-semibold text-white transition hover:bg-white/20">Member Community</a>
       </nav>
-      <button id="mobile-menu-button" class="md:hidden text-white">
-        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+      <button id="mobile-menu-button" class="md:hidden text-white" aria-label="Toggle navigation">
+        <svg class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m0 6H4"/>
         </svg>
       </button>
     </div>
-    <div id="mobile-menu" class="hidden md:hidden bg-brand-dark/90">
-      <a href="#overview" class="block py-2 px-6 text-gray-300 hover:bg-gray-700">Overview</a>
-      <a href="#background" class="block py-2 px-6 text-gray-300 hover:bg-gray-700">Background</a>
-      <a href="#videos" class="block py-2 px-6 text-gray-300 hover:bg-gray-700">Videos</a>
-      <a href="#project-glitch" class="block py-2 px-6 text-gray-300 hover:bg-gray-700">Project Glitch</a>
-      <a href="#summaries" class="block py-2 px-6 text-gray-300 hover:bg-gray-700">Summaries</a>
-      <a href="https://www.instituteforeconomicfreedom.org" target="_blank" class="block py-2 px-6 text-gray-300 hover:bg-gray-700">IEF Home</a>
+    <div id="mobile-menu" class="md:hidden hidden space-y-1 bg-brand-navy/95 px-6 pb-6 pt-3 text-sm font-medium uppercase tracking-[0.12em] text-brand-cloud">
+      <a href="#mission" class="block rounded-lg px-3 py-2 hover:bg-white/10">Mission</a>
+      <a href="#focus" class="block rounded-lg px-3 py-2 hover:bg-white/10">Focus Areas</a>
+      <a href="#videos" class="block rounded-lg px-3 py-2 hover:bg-white/10">Videos</a>
+      <a href="#project-glitch" class="block rounded-lg px-3 py-2 hover:bg-white/10">Project Glitch</a>
+      <a href="#summaries" class="block rounded-lg px-3 py-2 hover:bg-white/10">Summaries</a>
+      <a href="#venue" class="block rounded-lg px-3 py-2 hover:bg-white/10">Venue</a>
+      <a href="#government-notice" class="block rounded-lg px-3 py-2 hover:bg-white/10">Notice</a>
+      <a href="#background" class="block rounded-lg px-3 py-2 hover:bg-white/10">Background</a>
+      <a href="https://community.pgpforcrypto.org" class="mt-2 block rounded-full bg-white/10 px-3 py-2 text-center font-semibold text-white hover:bg-white/20">Member Community</a>
+      <a href="https://www.instituteforeconomicfreedom.org" target="_blank" rel="noopener noreferrer" class="block rounded-lg px-3 py-2 hover:bg-white/10">IEF Home</a>
     </div>
   </header>
-  <main>
-    <section class="hero-bg pt-32 pb-24 text-white text-center">
-      <div class="container mx-auto px-6">
-        <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-2">PGP* for Crypto</h1>
-        <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">Cultivating Pretty Good Policy for the Cryptocurrency Industry</p>
-        <p class="text-base text-gray-400 mt-2">An Initiative of the Institute for Economic Freedom</p>
-        <a href="#overview" class="mt-8 inline-block bg-brand-purple hover:bg-brand-accent text-white font-bold py-3 px-8 rounded-full transition-transform duration-300 hover:scale-105">Learn More</a>
-      </div>
-    </section>
 
-    <section id="overview" class="py-20 bg-white">
-      <div class="container mx-auto px-6">
-        <h2 class="text-3xl md:text-4xl font-bold text-text-dark text-center mb-4">About PGP* for Crypto</h2>
-        <p class="text-lg text-text-light text-center mb-12">PGP* (Pretty Good Policy) for Crypto is a monthly gathering designed to foster informed discussion and collaboration on critical cryptocurrency policy issues.</p>
-        <div class="max-w-4xl mx-auto bg-white p-8 md:p-12 rounded-2xl shadow-lg card-gradient">
-          <p class="text-gray-700 mb-6">The series brings together policy experts to work through key issues in digital‑asset regulation and innovation. We emphasize privacy‑preserving technologies and how they challenge current anti‑money‑laundering (AML) and know‑your‑customer (KYC) frameworks, highlighting how they are often incompatible with current technology and leveraging the collective wisdom of the PGP* community to devise policies to enable a more efficient and inclusive crypto‑based financial system.</p>
-          <p class="text-gray-700  mb-6">With support from Electric Coin Co., the developers of Zcash, Paul Brigner launched the PGP* meetings in early 2022 and continues to serve as host and lead organizer. In 2024, the Project Glitch team joined the series to provide a highly curated deep‑dive session at each meeting.</p>
-          <p class="text-gray-700">Each session begins with a networking breakfast with Pretty Good Pancakes and then includes a series of concise briefings (lightning talks) and a deep dive into a timely topic selected by Project Glitch—designed to encourage informed discussion and collaboration as we push for Pretty Good Policy for Crypto in the U.S.</p>
-		  <div class="mt-8 text-center"><a href="https://lu.ma/pgpforcrypto" target="_blank" class="inline-block bg-brand-purple hover:bg-brand-accent text-white font-semibold py-2 px-6 rounded-lg transition">Register for Upcoming Meetings</a></div>
+  <main id="top">
+    <section class="hero-sheen overflow-hidden pt-28 pb-32 text-white">
+      <div class="mx-auto flex max-w-6xl flex-col gap-16 px-6 lg:flex-row lg:items-center">
+        <div class="max-w-xl">
+          <p class="section-eyebrow text-xs font-semibold uppercase text-brand-cloud/80">Monthly Briefings for Crypto Policy Leaders</p>
+          <h1 class="mt-4 text-4xl font-extrabold leading-tight md:text-6xl">PGP* — Pretty Good Policy for Crypto</h1>
+          <p class="mt-6 text-lg text-brand-cloud">An initiative of the Institute for Economic Freedom, convening policymakers, privacy technologists, and advocates to advance balanced cryptocurrency frameworks.</p>
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a href="#mission" class="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-brand-navy transition hover:bg-brand-cloud">Explore the Mission</a>
+            <a href="https://community.pgpforcrypto.org" class="inline-flex items-center justify-center rounded-full border border-white/40 px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-white transition hover:border-white hover:bg-white/10">Join the Community</a>
+          </div>
+          <div class="mt-10 grid gap-4 sm:grid-cols-2">
+            <div class="rounded-2xl border border-white/10 bg-white/10 p-5 backdrop-blur-sm">
+              <p class="text-xs font-semibold uppercase tracking-[0.25em] text-brand-cloud">Regular Convenings</p>
+              <p class="mt-3 text-base text-brand-cloud">Monthly confidential briefings spotlight privacy-preserving technologies, regulatory shifts, and collaborative strategies for responsible innovation.</p>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-white/10 p-5 backdrop-blur-sm">
+              <p class="text-xs font-semibold uppercase tracking-[0.25em] text-brand-cloud">In Washington, D.C.</p>
+              <p class="mt-3 text-base text-brand-cloud">Hosted at the USC Capital Campus near Dupont Circle, with rotating speakers from industry, academia, civil society, and government.</p>
+            </div>
+          </div>
+        </div>
+        <div class="relative mx-auto w-full max-w-sm">
+          <div class="glow-ring"></div>
+          <div class="relative rounded-3xl border border-white/10 bg-white/5 p-8 text-center backdrop-blur">
+            <img src="pgp_profile_image.png" alt="PGP* profile" class="mx-auto mb-6 h-36 w-36 rounded-full border border-white/40 object-cover shadow-lg shadow-brand-navy/30"/>
+            <p class="text-sm uppercase tracking-[0.35em] text-brand-cloud/70">Policy. Privacy. Progress.</p>
+            <p class="mt-4 text-lg text-brand-cloud">Pretty Good Policy for Crypto fosters practical collaboration that respects privacy, security, and innovation.</p>
+          </div>
         </div>
       </div>
     </section>
 
-
-
-</section>
-<section class="py-20 bg-brand-light" id="videos"> <div class="container mx-auto px-6">
-<div class="text-center mb-12">
-<h2 class="text-3xl md:text-4xl font-bold text-text-dark">Featured Video Segments</h2>
-<p class="text-lg text-text-light mt-2 max-w-2xl mx-auto">Catch up on the most popular discussions from recent PGP* for Crypto meetings.</p>
-</div>
-<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-<div class="bg-white rounded-xl shadow-md overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
-<div class="relative w-full aspect-video">
-<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-in; gyroscope; picture-in-picture; web-share" allowfullscreen="" class="absolute top-0 left-0 w-full h-full" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/_NWf9VSkJRc" title="YouTube video player"></iframe>
-</div>
-<div class="p-6">
-<h3 class="text-xl font-bold text-text-dark mb-2">Josh Swihart: Sounding the Alarm -- Protecting Privacy and Security in the Crypto Ecosystem</h3>
-<p class="text-gray-600 text-sm">From PGP* for Crypto Briefings &amp; Roundtable</p>
-</div>
-</div>
-<div class="bg-white rounded-xl shadow-md overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
-<div class="relative w-full aspect-video">
-<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-in; gyroscope; picture-in-picture; web-share" allowfullscreen="" class="absolute top-0 left-0 w-full h-full" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/bAXxDopc2rM" title="YouTube video player"></iframe>
-</div>
-<div class="p-6">
-<h3 class="text-xl font-bold text-text-dark mb-2">Miles Jennings, a16z Crypto: Crypto Token Taxonomy</h3>
-<p class="text-gray-600 text-sm">From PGP* for Crypto Briefings &amp; Roundtable</p>
-</div>
-</div>
-<div class="bg-white rounded-xl shadow-md overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
-<div class="relative w-full aspect-video">
-<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-in; gyroscope; picture-in-picture; web-share" allowfullscreen="" class="absolute top-0 left-0 w-full h-full" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/VB2ZBMceAv0" title="YouTube video player"></iframe>
-</div>
-<div class="p-6">
-<h3 class="text-xl font-bold text-text-dark mb-2">Jason Somensatto: Advancing Crypto Policy -- Education, Advocacy, and Developer Rights</h3>
-<p class="text-gray-600 text-sm">From PGP* for Crypto Briefings &amp; Roundtable</p>
-</div>
-</div>
-</div>
-<div class="mt-12 text-center">
-<a class="inline-block bg-brand-purple hover:bg-brand-accent text-white font-semibold py-3 px-8 rounded-full transition-transform duration-300 hover:scale-105" href="https://www.youtube.com/@pgpforcrypto/playlists" target="_blank">
-                        View All Playlists on YouTube
-                    </a>
-</div>
-</div>
-</section>
-<section class="py-20 bg-white" id="project-glitch">
-<div class="container mx-auto px-6">
-<div class="text-center mb-12">
-<h2 class="text-3xl md:text-4xl font-bold text-text-dark">Project Glitch Curated Sessions</h2>
-<p class="text-lg text-text-light mt-2 max-w-2xl mx-auto">Selected deep dives into critical technical and policy issues from <a class="underline text-brand-purple hover:text-brand-accent" href="https://projectglitch.xyz" target="_blank">Project Glitch</a> at PGP* meetings.</p>
-</div>
-<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-<div class="bg-white rounded-xl shadow-md overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
-<div class="relative w-full aspect-video">
-<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-in; gyroscope; picture-in-picture; web-share" allowfullscreen="" class="absolute top-0 left-0 w-full h-full" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" src="https://youtube.com/embed/cAMgGCCR3Os" title="YouTube video player"></iframe>
-</div>
-<div class="p-6">
-<h3 class="text-xl font-bold text-text-dark mb-2">What decentralization can do for AI</h3>
-<p class="text-gray-600 text-sm">Featuring Art Abal, Managing Director of the Vana Foundation, and Jay Stanley, Senior Policy Analyst at the ACLU</p>
-</div>
-</div>
-	
-	<div class="bg-white rounded-xl shadow-md overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
-<div class="relative w-full aspect-video">
-<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-in; gyroscope; picture-in-picture; web-share" allowfullscreen="" class="absolute top-0 left-0 w-full h-full" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/hfhLqnXL3ak" title="YouTube video player"></iframe>
-</div>
-<div class="p-6">
-<h3 class="text-xl font-bold text-text-dark mb-2">Tornado Cash and Samourai Wallet Updates</h3>
-<p class="text-gray-600 text-sm">Featuring Amanda Tuminell, DeFi Education Fund, and Peter Van Valkenburg, Coin Center</p>
-</div>
-</div>
-<div class="bg-white rounded-xl shadow-md overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
-<div class="relative w-full aspect-video">
-<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-in; gyroscope; picture-in-picture; web-share" allowfullscreen="" class="absolute top-0 left-0 w-full h-full" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/euqOljuV43c" title="YouTube video player"></iframe>
-</div>
-<div class="p-6">
-<h3 class="text-xl font-bold text-text-dark mb-2">Samczsun on Crypto Security &amp; SEAL's Mission</h3>
-<p class="text-gray-600 text-sm">From PGP* for Crypto Briefings &amp; Roundtable</p>
-</div>
-</div>
-<div class="bg-white rounded-xl shadow-md overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
-<div class="relative w-full aspect-video">
-<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-in; gyroscope; picture-in-picture; web-share" allowfullscreen="" class="absolute top-0 left-0 w-full h-full" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/9abU3aooAPc" title="YouTube video player"></iframe>
-</div>
-<div class="p-6">
-<h3 class="text-xl font-bold text-text-dark mb-2">Confidential Stablecoins</h3>
-<p class="text-gray-600 text-sm">Featuring Leslie Chavkin (Paxos), Andrew Omietanski (Aztec), and Sina Kian (Aleo)</p>
-</div>
-</div>
-</div>
-<div class="mt-12 text-center">
-<a class="inline-block bg-brand-purple hover:bg-brand-accent text-white font-semibold py-3 px-8 rounded-full transition-transform duration-300 hover:scale-105" href="https://youtube.com/playlist?list=PLWmtTg-WFLv7dELgJvRe7OSNlF-tyAA7U&si=YfpIY44sAo8YjZ8e" target="_blank">
-                        View All Project Glitch Sessions
-                    </a>
-</div>
-</div>
-</section>
-<section class="py-20 bg-brand-light" id="summaries">
-<div class="container mx-auto px-6">
-<div class="text-center mb-12">
-<h2 class="text-3xl md:text-4xl font-bold text-text-dark">Meeting Summaries</h2>
-<p class="text-lg text-text-light mt-2 max-w-2xl mx-auto">Browse recent meeting summaries from PGP* for Crypto.</p>
-</div>
-<div class="flex justify-center"><div class="text-center space-y-4"><a class="text-brand-purple hover:text-brand-accent text-lg font-medium block" href="https://www.linkedin.com/pulse/pgp-briefings-september-17-2025-paul-brigner-yjjee" target="_blank">PGP* Briefings – September 17, 2025</a><a class="text-brand-purple hover:text-brand-accent text-lg font-medium block" href="https://www.linkedin.com/pulse/pgp-briefings-june-17-2025-paul-brigner-cefme" target="_blank">PGP* Briefings – June 17, 2025</a><a class="text-brand-purple hover:text-brand-accent text-lg font-medium block" href="https://www.linkedin.com/pulse/pgp-briefings-may-21-2025-paul-brigner-lxblc" target="_blank">PGP* Briefings – May 21, 2025</a><a class="text-brand-purple hover:text-brand-accent text-lg font-medium block" href="https://www.linkedin.com/pulse/pgp-briefings-april-23-2025-paul-brigner-yp5le" target="_blank">PGP* Briefings – April 23, 2025</a></div></div>
-<div class="mt-12 text-center">
-<a class="inline-block bg-brand-purple hover:bg-brand-accent text-white font-semibold py-3 px-8 rounded-full transition-transform duration-300 hover:scale-105" href="https://www.linkedin.com/in/paulbrigner/recent-activity/posts/" target="_blank">View All Summaries on LinkedIn</a>
-</div>
-</div>
-</section>
-	
-    <section id="background" class="py-20 bg-white">
-      <div class="container mx-auto px-6 max-w-3xl">
-        <div class="bg-white p-10 rounded-2xl shadow-lg border-l-8 border-brand-purple">
-          <h2 class="text-3xl font-bold text-text-dark mb-4">The Origin of “PGP*”</h2>
-          <p class="mb-4">The “<strong>PGP</strong>” reference is in homage to <a href="https://en.wikipedia.org/wiki/Pretty_Good_Privacy" target="_blank" class="text-brand-purple underline hover:text-brand-accent">Pretty Good Privacy</a> encryption and is carried over from Electric Coin Co.’s longstanding Pretty Good Pancakes breakfasts held in conjunction with industry events. As the first freely distributed, high quality public-key cryptography system, PGP (an acronym for <strong>P</strong>retty <strong>G</strong>ood <strong>P</strong>rivacy) was a widely used tool among cypherpunks for privacy protection and has had a major influence on the development of cryptocurrencies. PGP is still used today, especially in the cyber threat intelligence community.</p>
+    <section id="mission" class="bg-brand-ice py-24">
+      <div class="mx-auto max-w-4xl px-6 text-center">
+        <h2 class="lined-heading text-3xl font-bold md:text-4xl">Our Mission</h2>
+        <p class="mt-6 text-lg text-muted">PGP* for Crypto cultivates an informed policy community by convening trusted voices across the digital asset ecosystem. Each gathering surfaces emerging risks, governance lessons, and privacy-forward breakthroughs that are shaping cryptocurrency regulation worldwide.</p>
+        <div class="mt-10 rounded-3xl border border-brand-cloud/40 bg-white/90 p-10 shadow-xl shadow-brand-cloud/40">
+          <p class="text-left text-base text-muted">The series brings together policy experts to work through key issues in digital-asset regulation and innovation. We emphasize privacy-preserving technologies and how they challenge existing anti-money-laundering (AML) and know-your-customer (KYC) frameworks, highlighting how they can be incompatible with legacy approaches when deployed without nuance. Our dialogue pairs technical briefings with practical policy recommendations to build Pretty Good Policy for the cryptocurrency industry.</p>
         </div>
       </div>
-    </section>	
+    </section>
 
+    <section id="focus" class="bg-white py-24">
+      <div class="mx-auto max-w-6xl px-6">
+        <div class="text-center">
+          <h2 class="lined-heading text-3xl font-bold md:text-4xl">What We Explore</h2>
+          <p class="mt-4 text-lg text-muted">Curated sessions designed to bridge privacy innovation, market realities, and regulatory guardrails.</p>
+        </div>
+        <div class="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <div class="card-sheen rounded-3xl border border-brand-cloud/40 p-8 shadow-lg shadow-brand-cloud/30">
+            <h3 class="text-xl font-semibold text-ink">Privacy-Preserving Technologies</h3>
+            <p class="mt-3 text-muted">Zero-knowledge systems, encrypted finance, and digital-identity approaches that center user protections while meeting compliance goals.</p>
+          </div>
+          <div class="card-sheen rounded-3xl border border-brand-cloud/40 p-8 shadow-lg shadow-brand-cloud/30">
+            <h3 class="text-xl font-semibold text-ink">Actionable Policy Intelligence</h3>
+            <p class="mt-3 text-muted">Briefings from builders, industry leaders, and legal experts on pending legislation, enforcement activity, and international coordination.</p>
+          </div>
+          <div class="card-sheen rounded-3xl border border-brand-cloud/40 p-8 shadow-lg shadow-brand-cloud/30">
+            <h3 class="text-xl font-semibold text-ink">Collaborative Playbooks</h3>
+            <p class="mt-3 text-muted">Frameworks that align innovators, civil society, and regulators, translating technical nuance into pragmatic, rights-respecting policy.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="videos" class="bg-brand-navy py-24 text-white">
+      <div class="mx-auto max-w-6xl px-6">
+        <div class="text-center">
+          <p class="section-eyebrow text-xs font-semibold uppercase text-brand-cloud/80">Featured Segments</p>
+          <h2 class="mt-4 text-3xl font-bold md:text-4xl">Watch Recent Briefings</h2>
+          <p class="mt-4 text-brand-cloud">Catch up on the most-watched conversations from PGP* for Crypto meetings.</p>
+        </div>
+        <div class="mt-14 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <div class="rounded-3xl border border-white/10 bg-white/5 p-4 shadow-lg shadow-brand-navy/30">
+            <div class="relative w-full overflow-hidden rounded-2xl">
+              <div class="aspect-video">
+                <iframe class="h-full w-full" src="https://www.youtube.com/embed/_NWf9VSkJRc" title="Josh Swihart" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+              </div>
+            </div>
+            <div class="mt-4">
+              <h3 class="text-lg font-semibold">Josh Swihart: Protecting Privacy and Security</h3>
+              <p class="mt-2 text-sm text-brand-cloud">From PGP* for Crypto Briefings &amp; Roundtable</p>
+            </div>
+          </div>
+          <div class="rounded-3xl border border-white/10 bg-white/5 p-4 shadow-lg shadow-brand-navy/30">
+            <div class="relative w-full overflow-hidden rounded-2xl">
+              <div class="aspect-video">
+                <iframe class="h-full w-full" src="https://www.youtube.com/embed/bAXxDopc2rM" title="Miles Jennings" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+              </div>
+            </div>
+            <div class="mt-4">
+              <h3 class="text-lg font-semibold">Miles Jennings: Crypto Token Taxonomy</h3>
+              <p class="mt-2 text-sm text-brand-cloud">From PGP* for Crypto Briefings &amp; Roundtable</p>
+            </div>
+          </div>
+          <div class="rounded-3xl border border-white/10 bg-white/5 p-4 shadow-lg shadow-brand-navy/30">
+            <div class="relative w-full overflow-hidden rounded-2xl">
+              <div class="aspect-video">
+                <iframe class="h-full w-full" src="https://www.youtube.com/embed/VB2ZBMceAv0" title="Jason Somensatto" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+              </div>
+            </div>
+            <div class="mt-4">
+              <h3 class="text-lg font-semibold">Jason Somensatto: Advancing Crypto Policy</h3>
+              <p class="mt-2 text-sm text-brand-cloud">From PGP* for Crypto Briefings &amp; Roundtable</p>
+            </div>
+          </div>
+        </div>
+        <div class="mt-12 text-center">
+          <a href="https://www.youtube.com/@pgpforcrypto/playlists" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-brand-navy transition hover:bg-brand-cloud">View All Playlists on YouTube</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="project-glitch" class="bg-brand-ice py-24">
+      <div class="mx-auto max-w-6xl px-6">
+        <div class="text-center">
+          <p class="section-eyebrow text-xs font-semibold uppercase text-brand-lavender">Project Glitch</p>
+          <h2 class="mt-4 text-3xl font-bold md:text-4xl">Curated Deep Dives</h2>
+          <p class="mt-4 text-lg text-muted">Selected sessions from <a href="https://projectglitch.xyz" class="underline decoration-brand-denim underline-offset-4 hover:text-brand-denim" target="_blank" rel="noopener noreferrer">Project Glitch</a> at PGP* meetings.</p>
+        </div>
+        <div class="mt-14 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+          <div class="rounded-3xl border border-brand-cloud/60 bg-white p-4 shadow-lg shadow-brand-cloud/40">
+            <div class="aspect-video overflow-hidden rounded-2xl">
+              <iframe class="h-full w-full" src="https://youtube.com/embed/cAMgGCCR3Os" title="What decentralization can do for AI" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+            </div>
+            <div class="mt-4">
+              <h3 class="text-lg font-semibold text-ink">What Decentralization Dan Do for AI</h3>
+              <p class="mt-2 text-sm text-muted">Featuring Art Abal and Jay Stanley</p>
+            </div>
+          </div>
+          <div class="rounded-3xl border border-brand-cloud/60 bg-white p-4 shadow-lg shadow-brand-cloud/40">
+            <div class="aspect-video overflow-hidden rounded-2xl">
+              <iframe class="h-full w-full" src="https://www.youtube.com/embed/hfhLqnXL3ak" title="Tornado Cash and Samourai Wallet Updates" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+            </div>
+            <div class="mt-4">
+              <h3 class="text-lg font-semibold text-ink">Tornado Cash and Samourai Wallet Updates</h3>
+              <p class="mt-2 text-sm text-muted">Featuring Amanda Tuminell and Peter Van Valkenburg</p>
+            </div>
+          </div>
+          <div class="rounded-3xl border border-brand-cloud/60 bg-white p-4 shadow-lg shadow-brand-cloud/40">
+            <div class="aspect-video overflow-hidden rounded-2xl">
+              <iframe class="h-full w-full" src="https://www.youtube.com/embed/euqOljuV43c" title="Samczsun on Crypto Security" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+            </div>
+            <div class="mt-4">
+              <h3 class="text-lg font-semibold text-ink">Samczsun on Crypto Security &amp; SEAL's Mission</h3>
+              <p class="mt-2 text-sm text-muted">From PGP* for Crypto Briefings &amp; Roundtable</p>
+            </div>
+          </div>
+          <div class="rounded-3xl border border-brand-cloud/60 bg-white p-4 shadow-lg shadow-brand-cloud/40">
+            <div class="aspect-video overflow-hidden rounded-2xl">
+              <iframe class="h-full w-full" src="https://www.youtube.com/embed/9abU3aooAPc" title="Confidential Stablecoins" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+            </div>
+            <div class="mt-4">
+              <h3 class="text-lg font-semibold text-ink">Confidential Stablecoins</h3>
+              <p class="mt-2 text-sm text-muted">Featuring Leslie Chavkin, Andrew Omietanski, and Sina Kian</p>
+            </div>
+          </div>
+        </div>
+        <div class="mt-12 text-center">
+          <a href="https://youtube.com/playlist?list=PLWmtTg-WFLv7dELgJvRe7OSNlF-tyAA7U&si=YfpIY44sAo8YjZ8e" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center rounded-full border border-brand-denim px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-brand-denim transition hover:bg-brand-denim hover:text-white">View All Project Glitch Sessions</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="summaries" class="bg-white py-24">
+      <div class="mx-auto max-w-5xl px-6 text-center">
+        <h2 class="lined-heading text-3xl font-bold md:text-4xl">Meeting Summaries</h2>
+        <p class="mt-4 text-lg text-muted">Review highlights from recent briefings and roundtables.</p>
+        <div class="mt-12 grid gap-5 text-left sm:grid-cols-2">
+          <a href="https://www.linkedin.com/pulse/pgp-briefings-september-17-2025-paul-brigner-yjjee" target="_blank" rel="noopener noreferrer" class="rounded-3xl border border-brand-cloud/50 bg-brand-ice/80 p-6 shadow-md shadow-brand-cloud/30 transition hover:border-brand-denim hover:shadow-brand-denim/30">
+            <p class="text-xs font-semibold uppercase tracking-[0.25em] text-brand-lavender">September 17, 2025</p>
+            <h3 class="mt-3 text-lg font-semibold text-ink">PGP* Briefings – September 17, 2025</h3>
+          </a>
+          <a href="https://www.linkedin.com/pulse/pgp-briefings-june-17-2025-paul-brigner-cefme" target="_blank" rel="noopener noreferrer" class="rounded-3xl border border-brand-cloud/50 bg-brand-ice/80 p-6 shadow-md shadow-brand-cloud/30 transition hover:border-brand-denim hover:shadow-brand-denim/30">
+            <p class="text-xs font-semibold uppercase tracking-[0.25em] text-brand-lavender">June 17, 2025</p>
+            <h3 class="mt-3 text-lg font-semibold text-ink">PGP* Briefings – June 17, 2025</h3>
+          </a>
+          <a href="https://www.linkedin.com/pulse/pgp-briefings-may-21-2025-paul-brigner-lxblc" target="_blank" rel="noopener noreferrer" class="rounded-3xl border border-brand-cloud/50 bg-brand-ice/80 p-6 shadow-md shadow-brand-cloud/30 transition hover:border-brand-denim hover:shadow-brand-denim/30">
+            <p class="text-xs font-semibold uppercase tracking-[0.25em] text-brand-lavender">May 21, 2025</p>
+            <h3 class="mt-3 text-lg font-semibold text-ink">PGP* Briefings – May 21, 2025</h3>
+          </a>
+          <a href="https://www.linkedin.com/pulse/pgp-briefings-april-23-2025-paul-brigner-yp5le" target="_blank" rel="noopener noreferrer" class="rounded-3xl border border-brand-cloud/50 bg-brand-ice/80 p-6 shadow-md shadow-brand-cloud/30 transition hover:border-brand-denim hover:shadow-brand-denim/30">
+            <p class="text-xs font-semibold uppercase tracking-[0.25em] text-brand-lavender">April 23, 2025</p>
+            <h3 class="mt-3 text-lg font-semibold text-ink">PGP* Briefings – April 23, 2025</h3>
+          </a>
+        </div>
+        <div class="mt-12">
+          <a href="https://www.linkedin.com/in/paulbrigner/recent-activity/posts/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center rounded-full bg-brand-denim px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-white transition hover:bg-brand-lavender">View All Summaries on LinkedIn</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="venue" class="bg-brand-ice py-24">
+      <div class="mx-auto max-w-6xl px-6">
+        <div class="grid gap-12 lg:grid-cols-[3fr_2fr] lg:items-center">
+          <div>
+            <p class="section-eyebrow text-xs font-semibold uppercase text-brand-lavender">Venue</p>
+            <h2 class="mt-4 text-3xl font-bold text-ink md:text-4xl">USC Capital Campus</h2>
+            <p class="mt-4 text-lg text-muted">1771 N Street NW, Washington, D.C.</p>
+            <div class="mt-8 space-y-4 text-muted">
+              <p>Building on USC’s existing strengths as one of the nation’s leading universities for ideas, research, and innovation, the new campus in Washington, D.C., significantly expands opportunities for experts, thought-leaders, faculty, students, and alumni to serve the public good.</p>
+              <p>The mission of USC’s Capital Campus is to accelerate influence and impact, promote and develop strong leaders, and forge critical partnerships to address the nation’s most pressing issues and opportunities.</p>
+              <p>USC has led the charge in the development of Southern California for more than 150 years. In Washington, D.C., its longstanding commitment to quality and excellence expands an important role in the development of the nation and the world.</p>
+            </div>
+          </div>
+          <div class="overflow-hidden rounded-3xl border border-brand-cloud/50 shadow-lg shadow-brand-cloud/40">
+            <iframe title="USC Capital Campus map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3105.258914823958!2d-77.04260578464949!3d38.90970797957067!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89b7b79cd13cd5b9%3A0x4f5e7805f4e6e9d7!2s1771%20N%20St%20NW%2C%20Washington%2C%20DC%2020002!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus" width="100%" height="360" style="border:0" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="government-notice" class="bg-white py-24">
+      <div class="mx-auto max-w-4xl px-6">
+        <div class="rounded-3xl border border-brand-denim/30 bg-brand-ice/80 p-10 shadow-xl shadow-brand-cloud/40">
+          <h2 class="text-2xl font-bold text-ink md:text-3xl">Notice for Government Officials and Employees</h2>
+          <p class="mt-6 text-muted">PGP for Crypto is the organizing sponsor of this event and is committed to the highest level of ethical standards when interacting with government officials and employees. Kindly note that this is a widely attended event where we will be offering breakfast. To the extent that your local laws/internal policies limit your ability to accept the benefits provided at this event, and you wish to receive the per-person amount for the benefits provided, reimburse the full cost of the benefit, or decline attendance, please contact <a href="mailto:admin@pgpforcrypto.org" class="underline decoration-brand-denim underline-offset-4 hover:text-brand-denim">admin@pgpforcrypto.org</a>. By accepting the benefits provided at this event, it is our understanding that you are indicating that you are not prohibited by the applicable rules from doing so.</p>
+          <p class="mt-6 font-semibold text-ink">Questions? Email the host at <a href="mailto:admin@pgpforcrypto.org" class="text-brand-denim underline-offset-4 hover:underline">admin@pgpforcrypto.org</a>.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="background" class="bg-brand-ice py-24">
+      <div class="mx-auto max-w-4xl px-6">
+        <div class="rounded-3xl border border-brand-cloud/50 bg-white/90 p-10 shadow-xl shadow-brand-cloud/40">
+          <h2 class="text-3xl font-bold text-ink">The Origin of “PGP*”</h2>
+          <p class="mt-4 text-muted">The “<strong>PGP</strong>” reference is in homage to <a href="https://en.wikipedia.org/wiki/Pretty_Good_Privacy" target="_blank" rel="noopener noreferrer" class="underline decoration-brand-denim underline-offset-4 hover:text-brand-denim">Pretty Good Privacy</a> encryption and is carried over from Electric Coin Co.’s longstanding Pretty Good Pancakes breakfasts held in conjunction with industry events. As the first freely distributed, high quality public-key cryptography system, PGP (an acronym for <strong>P</strong>retty <strong>G</strong>ood <strong>P</strong>rivacy) was a widely used tool among cypherpunks for privacy protection and has had a major influence on the development of cryptocurrencies. PGP is still used today, especially in the cyber threat intelligence community.</p>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <footer class="bg-brand-dark text-gray-400 py-8">
-    <div class="container mx-auto px-6 text-center">
-      <p>© 2025 PGP* for Crypto · All Rights Reserved</p>
-      <p class="text-sm mt-2">An Initiative of the Institute for Economic Freedom</p>
+  <footer class="bg-brand-navy py-10 text-center text-brand-cloud">
+    <div class="mx-auto max-w-4xl px-6">
+      <p class="text-sm uppercase tracking-[0.3em] text-brand-cloud/80">An Initiative of the Institute for Economic Freedom</p>
+      <p class="mt-4 text-lg font-semibold text-white">© <span id="year"></span> PGP* for Crypto · All Rights Reserved</p>
     </div>
   </footer>
+
   <script>
     const mobileMenuButton = document.getElementById('mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
     mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+
     const header = document.getElementById('header');
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        header.classList.replace('py-4','py-2');
+      if (window.scrollY > 40) {
+        header.classList.replace('py-4', 'py-2');
+        header.classList.add('shadow-xl');
       } else {
-        header.classList.replace('py-2','py-4');
+        header.classList.replace('py-2', 'py-4');
+        header.classList.remove('shadow-xl');
       }
     });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
