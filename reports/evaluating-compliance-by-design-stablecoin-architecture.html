@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon" type="image/x-icon" href="../favicon.ico"/>
+  <title>Evaluating Compliance-by-Design Stablecoin Architecture | PGP* for Crypto</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'sans-serif'] },
+          colors: {
+            'brand-navy': '#0b0b43',
+            'brand-denim': '#4377f3',
+            'brand-lavender': '#62608c',
+            'brand-cloud': '#c1c5e2',
+            'brand-ice': '#fafafc',
+            'ink': '#14142f',
+            'muted': '#4d4f6d'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .hero-grid {
+      background: radial-gradient(circle at 18% 22%, rgba(67, 119, 243, 0.35), transparent 45%),
+                  radial-gradient(circle at 82% 4%, rgba(193, 197, 226, 0.34), transparent 38%),
+                  #0b0b43;
+    }
+    .lined-heading::after {
+      content: '';
+      display: block;
+      width: 3.5rem;
+      height: 0.25rem;
+      margin: 0.9rem 0 0;
+      border-radius: 9999px;
+      background: linear-gradient(90deg, rgba(67, 119, 243, 1), rgba(193, 197, 226, 0.45));
+    }
+    .glass {
+      backdrop-filter: blur(10px);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.82), rgba(193, 197, 226, 0.28));
+    }
+    .toc-link {
+      border-color: rgba(67, 119, 243, 0.26);
+    }
+    .toc-link:hover {
+      border-color: rgba(67, 119, 243, 0.6);
+      background: rgba(67, 119, 243, 0.06);
+    }
+    .section-chip {
+      letter-spacing: 0.22em;
+    }
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+      }
+      header,
+      .print-hidden {
+        display: none !important;
+      }
+      .hero-grid,
+      .bg-brand-ice,
+      .bg-brand-ice\/70,
+      .bg-brand-ice\/80,
+      .bg-white\/70,
+      .bg-white\/80,
+      .bg-white\/85,
+      .bg-white\/90,
+      .bg-brand-navy,
+      .bg-white {
+        background: #ffffff !important;
+      }
+      .glass {
+        background: #ffffff !important;
+        border-color: #d1d5db !important;
+      }
+      .shadow,
+      [class*="shadow-"] {
+        box-shadow: none !important;
+      }
+      section {
+        page-break-inside: avoid;
+      }
+      main {
+        padding-top: 0 !important;
+      }
+      a {
+        color: #000000 !important;
+        text-decoration: underline !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-brand-ice text-ink antialiased">
+  <div class="print-hidden absolute inset-0 -z-10 bg-[radial-gradient(circle_at_10%_15%,rgba(67,119,243,0.18),transparent_25%),radial-gradient(circle_at_85%_12%,rgba(193,197,226,0.3),transparent_25%),radial-gradient(circle_at_40%_80%,rgba(98,96,140,0.14),transparent_28%)]"></div>
+
+  <header class="sticky top-0 z-20 border-b border-white/60 bg-white/80 backdrop-blur">
+    <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+      <div class="flex items-center gap-3">
+        <div class="flex h-10 w-10 items-center justify-center rounded-full bg-brand-navy text-lg font-bold text-white shadow-lg shadow-brand-navy/30">PGP*</div>
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-[0.24em] text-brand-lavender">Report</p>
+          <p class="text-sm font-semibold text-ink">PGP* for Crypto</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="../index.html" class="text-sm font-semibold text-brand-denim underline decoration-brand-denim/50 underline-offset-4 hover:text-brand-navy">Back to main site</a>
+        <button id="print-button" class="hidden text-sm font-semibold text-brand-denim underline decoration-brand-denim/50 underline-offset-4 hover:text-brand-navy md:inline-flex" type="button">Print / Save PDF</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero-grid text-white">
+      <div class="mx-auto flex max-w-6xl flex-col gap-12 px-6 py-16 md:flex-row md:items-center md:py-20">
+        <div class="md:w-7/12">
+          <p class="section-chip text-xs font-semibold uppercase text-brand-cloud/80">Special Report</p>
+          <h1 class="mt-4 text-3xl font-extrabold leading-tight md:text-4xl">Evaluating Compliance-by-Design Stablecoin Architecture</h1>
+          <p class="mt-3 text-xl font-semibold text-brand-cloud">A Critical Analysis of the DOV Model and Alternative Approaches</p>
+          <p class="mt-6 max-w-2xl text-brand-cloud">An independent assessment of compliance-by-design stablecoin proposals, the systemic risks of embedded identity controls, and a layered alternative grounded in privacy-preserving, open standards.</p>
+        </div>
+        <div class="glass relative overflow-hidden rounded-3xl border border-white/20 p-6 shadow-2xl shadow-brand-navy/40 md:w-5/12 text-ink">
+          <div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/35 via-transparent to-brand-denim/10"></div>
+          <div class="relative space-y-3">
+            <div class="flex items-center gap-3">
+              <span class="inline-flex items-center rounded-full bg-brand-denim/20 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white">Key Themes</span>
+              <span class="text-sm font-semibold text-brand-navy">Privacy / Governance / Compliance</span>
+            </div>
+            <p class="text-base text-muted">The report examines honeypot risks, governance fragmentation, human-rights implications, technical constraints, and the limits of AML gains - then presents a Zcash + John Hancock Project alternative.</p>
+            <div class="h-px bg-white/30"></div>
+            <p class="text-xs uppercase tracking-[0.28em] text-brand-navy/70">Prepared for feedback circulation</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-6xl px-6 py-12 md:py-16">
+      <div class="rounded-3xl border border-brand-cloud/60 bg-white/80 p-6 shadow-lg shadow-brand-cloud/40 md:p-8">
+        <div class="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
+          <div class="md:max-w-md">
+            <p class="section-chip text-xs font-semibold uppercase text-brand-lavender">Table of Contents</p>
+            <p class="mt-3 text-lg text-muted">Jump to any section of the report.</p>
+          </div>
+          <div class="grid w-full gap-3 md:max-w-3xl md:grid-cols-2">
+            <a class="toc-link rounded-2xl border bg-white px-4 py-3 text-sm font-semibold text-ink transition" href="#executive-summary">1. Executive Summary</a>
+            <a class="toc-link rounded-2xl border bg-white px-4 py-3 text-sm font-semibold text-ink transition" href="#introduction">2. Introduction</a>
+            <div class="space-y-2 rounded-2xl border bg-white px-4 py-3 text-sm">
+              <a class="block font-semibold text-ink" href="#critique">3. Critique of the Compliance-by-Design Model</a>
+              <div class="grid gap-1 pl-2 text-muted">
+                <a class="hover:text-ink" href="#structural-data-honeypots">3.1 Structural Data Honeypots</a>
+                <a class="hover:text-ink" href="#fragmented-governance">3.2 Fragmented Governance</a>
+                <a class="hover:text-ink" href="#human-rights">3.3 Human Rights</a>
+                <a class="hover:text-ink" href="#technical-constraints">3.4 Technical Constraints</a>
+                <a class="hover:text-ink" href="#governance-concentration">3.5 Governance &amp; Capture</a>
+                <a class="hover:text-ink" href="#limited-aml-benefit">3.6 Limited AML Benefit</a>
+              </div>
+            </div>
+            <div class="space-y-2 rounded-2xl border bg-white px-4 py-3 text-sm">
+              <a class="block font-semibold text-ink" href="#john-hancock-project">4. Coin Center's John Hancock Project</a>
+              <div class="grid gap-1 pl-2 text-muted">
+                <a class="hover:text-ink" href="#jhp-core-features">4.1 Core Features</a>
+                <a class="hover:text-ink" href="#jhp-addresses-concerns">4.2 Addressing Concerns</a>
+              </div>
+            </div>
+            <div class="space-y-2 rounded-2xl border bg-white px-4 py-3 text-sm">
+              <a class="block font-semibold text-ink" href="#zcash-alternative">5. Zcash as a Base-Layer Alternative</a>
+              <div class="grid gap-1 pl-2 text-muted">
+                <a class="hover:text-ink" href="#zcash-architecture">5.1 Architecture</a>
+                <a class="hover:text-ink" href="#zcash-advantages">5.2 Advantages</a>
+                <a class="hover:text-ink" href="#integration-jhp-zcash">5.3 JHP Integration</a>
+                <a class="hover:text-ink" href="#monetary-design">5.4 Monetary Design</a>
+                <a class="hover:text-ink" href="#scalability-performance">5.5 Scalability</a>
+              </div>
+            </div>
+            <a class="toc-link rounded-2xl border bg-white px-4 py-3 text-sm font-semibold text-ink transition" href="#comparative-overview">6. Comparative Overview</a>
+            <a class="toc-link rounded-2xl border bg-white px-4 py-3 text-sm font-semibold text-ink transition" href="#conclusion">7. Conclusion &amp; Recommendation</a>
+            <a class="toc-link rounded-2xl border bg-white px-4 py-3 text-sm font-semibold text-ink transition" href="#references">8. References</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="executive-summary" class="mx-auto max-w-5xl px-6 py-10 md:py-14">
+      <div class="rounded-3xl border border-brand-cloud/60 bg-white/90 p-8 shadow-md shadow-brand-cloud/30 md:p-10">
+        <p class="section-chip text-xs font-semibold uppercase text-brand-lavender">1. Executive Summary</p>
+        <h2 class="lined-heading mt-3 text-3xl font-bold text-ink md:text-4xl">Systemic risks of compliance-by-design</h2>
+        <p class="mt-6 text-lg text-muted">This report evaluates the "compliance-by-design" stablecoin architecture proposed by Duffie, Olowookere, and Veneris (DOV). The analysis concludes that despite innovative cryptographic components, the model creates systemic data honeypots, increases the risk of financial surveillance, and is structurally incompatible with global medium-of-exchange needs due to jurisdictional fragmentation. This design also poses significant human-rights risks, enabling authoritarian misuse through centralized credential revocation and programmable financial controls.</p>
+        <p class="mt-6 text-lg text-muted">As an alternative, the report recommends a layered model combining (1) a privacy-preserving, neutral base-layer protocol such as Zcash, and (2) decentralized, open identity standards such as Coin Center's John Hancock Project. This combination offers privacy-by-default, selective disclosure, reduced centralization of personal data, and greater resilience against political abuse.</p>
+      </div>
+    </section>
+
+    <section id="introduction" class="mx-auto max-w-5xl px-6 py-10 md:py-14">
+      <div class="rounded-3xl border border-brand-cloud/60 bg-white/90 p-8 shadow-md shadow-brand-cloud/30 md:p-10">
+        <p class="section-chip text-xs font-semibold uppercase text-brand-lavender">2. Introduction</p>
+        <h2 class="lined-heading mt-3 text-3xl font-bold text-ink md:text-4xl">Understanding the DOV proposal</h2>
+        <p class="mt-6 text-muted">The IMF Finance &amp; Development article "The Stablecoin Balancing Act" outlines a "compliance-by-design" architecture for stablecoin payment systems. This approach seeks to reconcile user privacy with the requirements of Anti-Money Laundering (AML), Countering the Financing of Terrorism (CFT), and sanctions compliance by moving enforcement from ex-post, off-chain monitoring to real-time, on-chain enforcement.</p>
+        <p class="mt-6 text-muted">The core elements of the DOV model include:</p>
+        <ul class="mt-4 space-y-3 text-muted">
+          <li><span class="font-semibold text-ink">KYC Perimeter:</span> Users obtain verified identity from a licensed "credential issuer," which places a hashed cryptographic commitment of the credential on the stablecoin ledger.</li>
+          <li><span class="font-semibold text-ink">zkKYC and Zero-Knowledge Proofs (ZKPs):</span> Transactions are verified using ZKPs, proving the user holds a valid credential and meets KYC criteria without revealing their identity on-chain.</li>
+          <li><span class="font-semibold text-ink">On-chain Compliance Engine:</span> Embedded smart contracts monitor transactions for red flags and automatically generate Suspicious Activity Reports (SARs), with the ability to delay or block transfers.</li>
+          <li><span class="font-semibold text-ink">Layered Transparency:</span> Identities are unmasked only following a legal process (warrant, subpoena) triggered by a SAR.</li>
+          <li><span class="font-semibold text-ink">Governance:</span> The system assumes a network of licensed credential issuers and smart-contract operators, with common standards and interoperability.</li>
+        </ul>
+        <p class="mt-6 text-muted">This report challenges the underlying assumptions of the compliance-by-design model, arguing that its concentration of power and data creates significant systemic risks that outweigh its purported compliance benefits.</p>
+      </div>
+    </section>
+
+    <section id="critique" class="bg-white/70 py-14">
+      <div class="mx-auto max-w-6xl px-6">
+        <div class="mb-10 md:mb-14">
+          <p class="section-chip text-xs font-semibold uppercase text-brand-lavender">3. Critique of the Compliance-by-Design Stablecoin Model</p>
+          <h2 class="lined-heading mt-3 text-3xl font-bold text-ink md:text-4xl">Why embedding compliance into consensus is risky</h2>
+        </div>
+
+        <div id="structural-data-honeypots" class="grid gap-6 md:grid-cols-2">
+          <div class="rounded-2xl border border-brand-cloud/60 bg-white p-6 shadow-md shadow-brand-cloud/30">
+            <p class="text-xs font-semibold uppercase tracking-[0.2em] text-brand-lavender">3.1</p>
+            <h3 class="mt-2 text-xl font-semibold text-ink">Structural Data Honeypots and Re-Identification Risk</h3>
+            <p class="mt-4 text-muted">Even with the use of ZKPs and hashed credentials, the DOV model mandates the creation of large, highly attractive stores of sensitive data, maximizing the "blast radius" of any breach:</p>
+            <ul class="mt-4 space-y-3 text-muted">
+              <li><span class="font-semibold text-ink">Credential Issuer Databases:</span> Issuers must maintain "databases of validated user credentials" containing real-world identity documents linked to on-chain addresses.</li>
+              <li><span class="font-semibold text-ink">Linkability through Compromise:</span> A breach of a major credential issuer would allow an attacker to link off-chain identities to on-chain hashes and the aggregated financial histories they represent.</li>
+              <li><span class="font-semibold text-ink">Centralized SAR Logic:</span> Compliance smart contracts and risk models themselves represent critical intelligence, detailing law enforcement thresholds and targeting patterns.</li>
+              <li><span class="font-semibold text-ink">De-anonymization Risk:</span> Transaction metadata combined with external data often proves sufficient for de-anonymization, regardless of the strength of on-chain hashing or ZKPs.</li>
+            </ul>
+            <p class="mt-4 text-muted">The architecture fundamentally increases systemic risk by centralizing identity, compliance logic, and transaction-level risk scoring in a small number of supervised intermediaries.</p>
+          </div>
+          <div id="fragmented-governance" class="rounded-2xl border border-brand-cloud/60 bg-white p-6 shadow-md shadow-brand-cloud/30">
+            <p class="text-xs font-semibold uppercase tracking-[0.2em] text-brand-lavender">3.2</p>
+            <h3 class="mt-2 text-xl font-semibold text-ink">Fragmented Global Governance and Medium-of-Exchange Limitations</h3>
+            <p class="mt-4 text-muted">The DOV model's reliance on embedding national legal standards into consensus logic creates structural problems for its function as a global medium of exchange:</p>
+            <ul class="mt-4 space-y-3 text-muted">
+              <li><span class="font-semibold text-ink">Divergent Risk Lists:</span> Major jurisdictions will not align on risk lists or sanctions policies. A single global ledger cannot enforce incompatible rule sets without severe fragmentation.</li>
+              <li><span class="font-semibold text-ink">Extraterritorial Control:</span> If a dominant jurisdiction controls the smart-contract logic, its sanctions lists become de facto global infrastructure, undermining other nations' sovereignty.</li>
+              <li><span class="font-semibold text-ink">Jurisdictional Arbitrage:</span> Users and issuers will gravitate toward permissive regimes, driving the fragmentation the model seeks to avoid.</li>
+            </ul>
+            <p class="mt-4 text-muted">A system whose ability to send funds depends on conflicting national rule sets embedded in consensus logic is destined to fragment along geopolitical lines.</p>
+          </div>
+        </div>
+
+        <div class="mt-6 grid gap-6 md:grid-cols-3">
+          <div id="human-rights" class="rounded-2xl border border-brand-cloud/60 bg-white p-6 shadow-md shadow-brand-cloud/30">
+            <p class="text-xs font-semibold uppercase tracking-[0.2em] text-brand-lavender">3.3</p>
+            <h3 class="mt-2 text-xl font-semibold text-ink">Human Rights and Authoritarian Misuse</h3>
+            <ul class="mt-4 space-y-3 text-muted">
+              <li><span class="font-semibold text-ink">Credential Revocation as Deplatforming:</span> Administrative revocation can exclude opponents from economic life.</li>
+              <li><span class="font-semibold text-ink">Low Due-Process Thresholds:</span> Weak legal safeguards can enable rapid unmasking without independent review.</li>
+              <li><span class="font-semibold text-ink">Mission Creep and Censorship:</span> SAR criteria can be expanded to political categories, automating censorship.</li>
+            </ul>
+          </div>
+          <div id="technical-constraints" class="rounded-2xl border border-brand-cloud/60 bg-white p-6 shadow-md shadow-brand-cloud/30">
+            <p class="text-xs font-semibold uppercase tracking-[0.2em] text-brand-lavender">3.4</p>
+            <h3 class="mt-2 text-xl font-semibold text-ink">Technical and Computational Constraints</h3>
+            <ul class="mt-4 space-y-3 text-muted">
+              <li><span class="font-semibold text-ink">Computational Overhead:</span> Per-transaction zkKYC proofs and compliance checks add latency and cost.</li>
+              <li><span class="font-semibold text-ink">Smart-Contract Complexity:</span> Constantly updating regulatory logic risks bugs and network halts.</li>
+              <li><span class="font-semibold text-ink">Denial-of-Service Risk:</span> Attackers could stress compliance logic to destabilize the system.</li>
+              <li><span class="font-semibold text-ink">Specialized Cryptography Dependence:</span> Complex ZK systems increase the odds of subtle, high-impact bugs.</li>
+            </ul>
+          </div>
+          <div id="governance-concentration" class="rounded-2xl border border-brand-cloud/60 bg-white p-6 shadow-md shadow-brand-cloud/30">
+            <p class="text-xs font-semibold uppercase tracking-[0.2em] text-brand-lavender">3.5</p>
+            <h3 class="mt-2 text-xl font-semibold text-ink">Governance, Concentration, and Capture</h3>
+            <ul class="mt-4 space-y-3 text-muted">
+              <li><span class="font-semibold text-ink">Regulatory Capture:</span> Dominant financial institutions may shape rules in ways that erode privacy and competition.</li>
+              <li><span class="font-semibold text-ink">Single Points of Failure:</span> Compromise of a major issuer or SAR logic operator can affect large portions of the network.</li>
+              <li><span class="font-semibold text-ink">Opaque Rule-Making:</span> Critical interpretations of "suspicious activity" could be determined with limited public oversight.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div id="limited-aml-benefit" class="mt-6 rounded-2xl border border-brand-cloud/60 bg-white p-6 shadow-md shadow-brand-cloud/30">
+          <p class="text-xs font-semibold uppercase tracking-[0.2em] text-brand-lavender">3.6</p>
+          <h3 class="mt-2 text-xl font-semibold text-ink">Limited Incremental AML Benefit</h3>
+          <p class="mt-4 text-muted">Existing KYC/AML regimes are empirically ineffective, intercepting an estimated less than 1 percent of illicit funds globally. The DOV model intensifies this paradigm - centralized identity collection and universal pre-screening - rather than questioning its efficacy. Given the high costs in privacy, resilience, and human rights, the policy justification for embedding this ineffective compliance model into the base layer is weak.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="john-hancock-project" class="mx-auto max-w-6xl px-6 py-14">
+      <div class="rounded-3xl border border-brand-cloud/60 bg-white/90 p-8 shadow-md shadow-brand-cloud/30 md:p-10">
+        <p class="section-chip text-xs font-semibold uppercase text-brand-lavender">4. Coin Center's John Hancock Project: A Different Identity and Compliance Model</p>
+        <h2 class="lined-heading mt-3 text-3xl font-bold text-ink md:text-4xl">Open, interoperable, and privacy-preserving credentials</h2>
+        <div id="jhp-core-features" class="mt-8 grid gap-6 md:grid-cols-2">
+          <div class="rounded-2xl border border-brand-cloud/60 bg-brand-ice/70 p-6">
+            <p class="text-xs font-semibold uppercase tracking-[0.2em] text-brand-lavender">4.1</p>
+            <h3 class="mt-2 text-xl font-semibold text-ink">Core Features of the John Hancock Project</h3>
+            <ul class="mt-4 space-y-3 text-muted">
+              <li><span class="font-semibold text-ink">Open, Interoperable Standards:</span> Drafts decentralized, privacy-preserving credential standards any vendor or institution can implement.</li>
+              <li><span class="font-semibold text-ink">Decentralized, User-Held Identity:</span> Verifiable credentials are held by users and shared selectively, eliminating centralized identity databases.</li>
+              <li><span class="font-semibold text-ink">Self-Sovereign Attestations:</span> Entities issue cryptographic attestations and "self-sovereign risk scores" provable in zero knowledge.</li>
+              <li><span class="font-semibold text-ink">Constructive Government Role:</span> Government recognizes open standards as acceptable compliance methods rather than operating core infrastructure.</li>
+            </ul>
+          </div>
+          <div id="jhp-addresses-concerns" class="rounded-2xl border border-brand-cloud/60 bg-brand-ice/70 p-6">
+            <p class="text-xs font-semibold uppercase tracking-[0.2em] text-brand-lavender">4.2</p>
+            <h3 class="mt-2 text-xl font-semibold text-ink">How JHP Addresses Core Concerns</h3>
+            <div class="mt-4 grid gap-4">
+              <div class="rounded-xl border border-brand-cloud/60 bg-white p-4">
+                <p class="text-sm font-semibold text-ink">Honeypots and Data Centralization</p>
+                <p class="mt-2 text-sm text-muted">Credentials are user-held and portable, minimizing central databases. ZK proofs and selective disclosure lower the value of any single breach.</p>
+              </div>
+              <div class="rounded-xl border border-brand-cloud/60 bg-white p-4">
+                <p class="text-sm font-semibold text-ink">Global Compatibility</p>
+                <p class="mt-2 text-sm text-muted">Standards are payment-rail agnostic, letting jurisdictions apply their own screening without forcing a global blacklist into consensus logic.</p>
+              </div>
+              <div class="rounded-xl border border-brand-cloud/60 bg-white p-4">
+                <p class="text-sm font-semibold text-ink">Authoritarian Misuse</p>
+                <p class="mt-2 text-sm text-muted">Decentralized, user-controlled attestations remove the central switch that would allow system-wide exclusion of dissidents.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="zcash-alternative" class="bg-white/70 py-14">
+      <div class="mx-auto max-w-6xl px-6">
+        <div class="rounded-3xl border border-brand-cloud/60 bg-white/90 p-8 shadow-md shadow-brand-cloud/30 md:p-10">
+          <p class="section-chip text-xs font-semibold uppercase text-brand-lavender">5. Zcash as a Base-Layer Alternative: Privacy-First Money with Optional Compliance</p>
+          <h2 class="lined-heading mt-3 text-3xl font-bold text-ink md:text-4xl">Decoupling compliance from consensus</h2>
+
+          <div id="zcash-architecture" class="mt-8 rounded-2xl border border-brand-cloud/60 bg-brand-ice/70 p-6">
+            <p class="text-xs font-semibold uppercase tracking-[0.2em] text-brand-lavender">5.1</p>
+            <h3 class="mt-2 text-xl font-semibold text-ink">Zcash Architecture in Brief</h3>
+            <p class="mt-4 text-muted">Zcash utilizes zk-SNARKs to support shielded transactions, where amounts and counterparties are encrypted on-chain.</p>
+            <p class="mt-3 text-muted"><span class="font-semibold text-ink">Selective Disclosure via Viewing Keys:</span> Shielded addresses have an associated viewing key that allows read-only access to transaction history without spending authority. Users can selectively share these keys with auditors, regulators, or tax authorities.</p>
+          </div>
+
+          <div id="zcash-advantages" class="mt-6 grid gap-6 md:grid-cols-2">
+            <div class="rounded-2xl border border-brand-cloud/60 bg-white p-6 shadow-sm">
+              <p class="text-xs font-semibold uppercase tracking-[0.2em] text-brand-lavender">5.2</p>
+              <h3 class="mt-2 text-xl font-semibold text-ink">Advantages over Compliance-by-Design Stablecoins</h3>
+              <ul class="mt-4 space-y-3 text-muted">
+                <li><span class="font-semibold text-ink">Data Minimization:</span> No requirement to register identity or maintain hashed KYC credentials on-chain. The ledger reveals minimal information.</li>
+                <li><span class="font-semibold text-ink">Neutral Base Layer:</span> Consensus rules enforce only validity. AML/CFT is implemented at the edges, keeping the base layer politically neutral.</li>
+                <li><span class="font-semibold text-ink">Targeted Compliance:</span> Regulated entities can require address-specific viewing keys, providing regulatory visibility without broadcasting data to the world.</li>
+                <li><span class="font-semibold text-ink">Resilience:</span> An authoritarian government cannot repurpose the base protocol as a centralized control system because there is no native KYC perimeter or SAR engine to seize.</li>
+              </ul>
+            </div>
+            <div id="integration-jhp-zcash" class="rounded-2xl border border-brand-cloud/60 bg-white p-6 shadow-sm">
+              <p class="text-xs font-semibold uppercase tracking-[0.2em] text-brand-lavender">5.3</p>
+              <h3 class="mt-2 text-xl font-semibold text-ink">Integration of John Hancock-Style Identity with Zcash</h3>
+              <p class="mt-4 text-muted">The optimal solution is a layered architecture:</p>
+              <ul class="mt-4 space-y-3 text-muted">
+                <li><span class="font-semibold text-ink">Base Layer (Zcash):</span> Provides censorship-resistant, privacy-preserving settlement.</li>
+                <li><span class="font-semibold text-ink">Identity/Compliance Layer (JHP-style credentials):</span> Provides portable, privacy-preserving credentials and attestations for regulated entities to use for onboarding and targeted reporting.</li>
+              </ul>
+              <p class="mt-4 text-muted">This combination keeps the rail neutral and private, while allowing sophisticated, privacy-preserving compliance where law or business needs require it.</p>
+            </div>
+          </div>
+
+          <div class="mt-6 space-y-6">
+            <div id="monetary-design" class="rounded-2xl border border-brand-cloud/60 bg-brand-ice/70 p-6">
+              <p class="text-xs font-semibold uppercase tracking-[0.2em] text-brand-lavender">5.4</p>
+              <h3 class="mt-2 text-xl font-semibold text-ink">Monetary Design and Medium-of-Exchange Function</h3>
+              <p class="mt-4 text-muted">While ZEC is a floating asset, stable value can be achieved by deploying Zcash-backed or Zcash-settled stablecoins. Issuers can utilize Zcash's shielded layer for privacy and view keys for compliance, while JHP-style credentials govern issuance and redemption, leaving secondary transfers private. The key difference from DOV is that compliance is decoupled from the base-layer transaction.</p>
+            </div>
+            <div id="scalability-performance" class="rounded-2xl border border-brand-cloud/60 bg-brand-ice/70 p-6">
+              <p class="text-xs font-semibold uppercase tracking-[0.2em] text-brand-lavender">5.5</p>
+              <h3 class="mt-2 text-xl font-semibold text-ink">Scalability and Performance</h3>
+              <p class="mt-4 text-muted">Zcash has made steady progress improving shielded performance, most notably through the transition to Halo 2, which removed the need for a trusted setup and reduced proof sizes and verification overhead. These upgrades let the shielded pool operate more efficiently as usage grows.</p>
+              <p class="mt-4 text-muted">A major forward-looking improvement is Project Tachyon, an Electric Coin Company initiative to redesign Zcash network architecture for higher throughput, better fee economics, and modernized consensus operations. Tachyon proposes a modular, performance-oriented architecture that can:</p>
+              <ul class="mt-4 space-y-3 text-muted">
+                <li><span class="font-semibold text-ink">Increase transaction throughput</span> by redesigning validation and mempool pathways.</li>
+                <li><span class="font-semibold text-ink">Improve fee efficiency</span> by reducing competition for block space and enabling more predictable economics.</li>
+                <li><span class="font-semibold text-ink">Support future enhancements</span> such as light-client scalability, improved wallet performance, and expanded shielded functionality.</li>
+                <li><span class="font-semibold text-ink">Lay groundwork for optional programmability and interoperability</span> without compromising Zcash privacy guarantees.</li>
+              </ul>
+              <p class="mt-4 text-muted">Tachyon keeps the base layer lightweight, private, and high-performance while enabling richer functionality through layered systems. This avoids the DOV requirement to embed compliance logic in consensus, keeping scalability improvements independent of regulatory complexity.</p>
+              <p class="mt-4 text-muted">As Tachyon and related improvements roll out, Zcash is positioned to support:</p>
+              <ul class="mt-4 space-y-3 text-muted">
+                <li>Higher-volume retail and commercial payments</li>
+                <li>Large-scale shielded stablecoin settlement</li>
+                <li>Selective-disclosure business workflows, especially when combined with JHP-style credentials</li>
+              </ul>
+              <p class="mt-4 text-muted">These changes strengthen Zcash as a privacy-preserving settlement layer that can scale with demand while remaining neutral, resilient, and globally interoperable.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="comparative-overview" class="mx-auto max-w-6xl px-6 py-14">
+      <div class="rounded-3xl border border-brand-cloud/60 bg-white/90 p-8 shadow-md shadow-brand-cloud/30 md:p-10">
+        <p class="section-chip text-xs font-semibold uppercase text-brand-lavender">6. Comparative Overview</p>
+        <h2 class="lined-heading mt-3 text-3xl font-bold text-ink md:text-4xl">Contrasting architectures at a glance</h2>
+        <div class="mt-8 overflow-hidden rounded-2xl border border-brand-cloud/60">
+          <table class="min-w-full divide-y divide-brand-cloud/60">
+            <thead class="bg-brand-ice/80">
+              <tr>
+                <th class="px-4 py-3 text-left text-sm font-semibold text-ink">Dimension</th>
+                <th class="px-4 py-3 text-left text-sm font-semibold text-ink">DOV Compliance-by-Design Stablecoin</th>
+                <th class="px-4 py-3 text-left text-sm font-semibold text-ink">John Hancock Project (JHP)</th>
+                <th class="px-4 py-3 text-left text-sm font-semibold text-ink">Zcash + JHP-Style Identity</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-brand-cloud/50 bg-white text-sm text-muted">
+              <tr>
+                <td class="px-4 py-4 font-semibold text-ink">Data Architecture</td>
+                <td class="px-4 py-4">Centralized identity databases; hashed credentials and SAR logic on-chain.</td>
+                <td class="px-4 py-4">Decentralized, user-held verifiable credentials; open standards for proofs.</td>
+                <td class="px-4 py-4">Encrypted ledger with no native KYC; optional credentials off-chain; view keys for selective disclosure.</td>
+              </tr>
+              <tr class="bg-brand-ice/50">
+                <td class="px-4 py-4 font-semibold text-ink">Compliance Model</td>
+                <td class="px-4 py-4">Real-time on-chain checks; smart contracts auto-generate SARs/block transfers.</td>
+                <td class="px-4 py-4">Off-chain attestations; regulators recognize standards.</td>
+                <td class="px-4 py-4">Edge-based compliance: institutions use JHP credentials + view keys; base layer enforces only validity.</td>
+              </tr>
+              <tr>
+                <td class="px-4 py-4 font-semibold text-ink">Honeypot Risk</td>
+                <td class="px-4 py-4">High: Large identity databases plus rich on-chain metadata and SAR rules.</td>
+                <td class="px-4 py-4">Reduced: User-centric credentials; minimal central storage.</td>
+                <td class="px-4 py-4">Low at protocol level: No identity or SAR logic on-chain.</td>
+              </tr>
+              <tr class="bg-brand-ice/50">
+                <td class="px-4 py-4 font-semibold text-ink">Global Governance</td>
+                <td class="px-4 py-4">Requires harmonized or interoperable rules; high risk of geopolitical fragmentation.</td>
+                <td class="px-4 py-4">Standards are payment-rail agnostic; jurisdictions adopt without controlling base layers.</td>
+                <td class="px-4 py-4">Base layer neutral; jurisdictions implement compliance via local institutions; easier coexistence.</td>
+              </tr>
+              <tr>
+                <td class="px-4 py-4 font-semibold text-ink">Authoritarian Misuse</td>
+                <td class="px-4 py-4">Easy: Revoke credentials or lower legal thresholds to block and unmask users system-wide.</td>
+                <td class="px-4 py-4">Harder: Credentials are distributed; misuse requires targeted action.</td>
+                <td class="px-4 py-4">Hardest at base layer: No built-in KYC; censorship must operate via local intermediaries.</td>
+              </tr>
+              <tr class="bg-brand-ice/50">
+                <td class="px-4 py-4 font-semibold text-ink">Alignment with Human Rights</td>
+                <td class="px-4 py-4">Depends heavily on jurisdiction and governance culture.</td>
+                <td class="px-4 py-4">Designed explicitly around user control and civil liberties.</td>
+                <td class="px-4 py-4">Strong at protocol level; rights aligned if combined with JHP-style standards.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="conclusion" class="mx-auto max-w-5xl px-6 py-14">
+      <div class="rounded-3xl border border-brand-cloud/60 bg-white/90 p-8 shadow-md shadow-brand-cloud/30 md:p-10">
+        <p class="section-chip text-xs font-semibold uppercase text-brand-lavender">7. Conclusion and Recommendation</p>
+        <h2 class="lined-heading mt-3 text-3xl font-bold text-ink md:text-4xl">A layered path forward</h2>
+        <p class="mt-6 text-muted">The Duffie-Olowookere-Veneris model, while technically sophisticated, is fundamentally incompatible with the requirements of a resilient, global, and rights-respecting medium of exchange. It centralizes data, embeds politically contestable rules into core infrastructure, and creates a highly governable system prone to mission creep and authoritarian abuse.</p>
+        <p class="mt-6 text-muted">The recommended alternative - combining a privacy-preserving, neutral base layer like Zcash with an open, decentralized identity and compliance framework like Coin Center's John Hancock Project - offers a superior path:</p>
+        <ul class="mt-4 space-y-3 text-muted">
+          <li><span class="font-semibold text-ink">Privacy by Default:</span> Transactions are private, with selective disclosure via viewing keys and ZK attestations.</li>
+          <li><span class="font-semibold text-ink">Compliance Decoupled:</span> Compliance is targeted and risk-based at the institutional edge, not universal at the protocol core.</li>
+          <li><span class="font-semibold text-ink">Resilience:</span> The infrastructure is harder to repurpose for authoritarian control because the base layer lacks built-in governance levers.</li>
+          <li><span class="font-semibold text-ink">Global Compatibility:</span> Jurisdictions can enforce their own rules at the edge without attempting to control the underlying rail.</li>
+        </ul>
+        <p class="mt-6 text-muted">This layered approach aligns better with data-minimization principles, civil-liberties norms, and the need for neutral, resilient global payment infrastructure.</p>
+      </div>
+    </section>
+
+    <section id="references" class="mx-auto max-w-5xl px-6 pb-20">
+      <div class="rounded-3xl border border-brand-cloud/60 bg-white/90 p-8 shadow-md shadow-brand-cloud/30 md:p-10">
+        <p class="section-chip text-xs font-semibold uppercase text-brand-lavender">8. References</p>
+        <h2 class="lined-heading mt-3 text-3xl font-bold text-ink md:text-4xl">Source materials</h2>
+        <ul class="mt-6 space-y-3 text-muted">
+          <li><span class="font-semibold text-ink">Coin Center.</span> "Tear Down this Walled Garden: American Values and Digital Identity." <a class="text-brand-denim hover:text-brand-navy" href="https://www.coincenter.org/tear-down-this-walled-garden-american-values-and-digital-identity/" target="_blank" rel="noopener noreferrer">https://www.coincenter.org/tear-down-this-walled-garden-american-values-and-digital-identity/</a></li>
+          <li><span class="font-semibold text-ink">Coin Center.</span> "Digital identity is broken. The tech to fix it is ready. Here's how the government can help." <a class="text-brand-denim hover:text-brand-navy" href="https://www.coincenter.org/digital-identity-is-broken-the-tech-to-fix-it-is-ready-heres-how-the-government-can-help/" target="_blank" rel="noopener noreferrer">https://www.coincenter.org/digital-identity-is-broken-the-tech-to-fix-it-is-ready-heres-how-the-government-can-help/</a></li>
+          <li><span class="font-semibold text-ink">Electric Coin Company.</span> "Viewing Keys: Selective Disclosure." <a class="text-brand-denim hover:text-brand-navy" href="https://electriccoin.co/blog/viewing-keys-selective-disclosure/" target="_blank" rel="noopener noreferrer">https://electriccoin.co/blog/viewing-keys-selective-disclosure/</a></li>
+          <li><span class="font-semibold text-ink">Electric Coin Company.</span> "Tachyon: The Future of Zcash Performance." <a class="text-brand-denim hover:text-brand-navy" href="https://electriccoin.co/blog/tachyon/" target="_blank" rel="noopener noreferrer">https://electriccoin.co/blog/tachyon/</a></li>
+          <li><span class="font-semibold text-ink">GetPodcast.</span> "Why is the SEC Concerned About Privacy Now?" (Podcast episode covering SEC concerns around privacy and Zcash.) <a class="text-brand-denim hover:text-brand-navy" href="https://getpodcast.com/uk/podcast/the-breakdown-with-nlw/why-is-the-sec-concerned-about-privacy-now_ba6d1e8a7d" target="_blank" rel="noopener noreferrer">https://getpodcast.com/uk/podcast/the-breakdown-with-nlw/why-is-the-sec-concerned-about-privacy-now_ba6d1e8a7d</a></li>
+          <li><span class="font-semibold text-ink">Zcash Documentation.</span> "Basics." <a class="text-brand-denim hover:text-brand-navy" href="https://z.cash/technology/" target="_blank" rel="noopener noreferrer">https://z.cash/technology/</a></li>
+          <li><span class="font-semibold text-ink">Coinbase Institutional Research.</span> "Privacy Coins: Zcash." <a class="text-brand-denim hover:text-brand-navy" href="https://www.coinbase.com/institutional/research/zcash-zec" target="_blank" rel="noopener noreferrer">https://www.coinbase.com/institutional/research/zcash-zec</a></li>
+          <li><span class="font-semibold text-ink">Darrell Duffie.</span> "The Stablecoin Balancing Act." Finance &amp; Development, International Monetary Fund, September 2025. <a class="text-brand-denim hover:text-brand-navy" href="https://www.imf.org/en/publications/fandd/issues/2025/09/the-stablecoin-balancing-act-darrell-duffie" target="_blank" rel="noopener noreferrer">https://www.imf.org/en/publications/fandd/issues/2025/09/the-stablecoin-balancing-act-darrell-duffie</a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+  <script>
+    const printButton = document.getElementById('print-button');
+    if (printButton) {
+      printButton.addEventListener('click', () => window.print());
+    }
+  </script>
+</body>
+</html>
