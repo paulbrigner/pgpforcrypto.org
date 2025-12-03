@@ -175,7 +175,7 @@
                 <a class="hover:text-ink" href="#zcash-architecture">5.1 Architecture</a>
                 <a class="hover:text-ink" href="#zcash-advantages">5.2 Advantages</a>
                 <a class="hover:text-ink" href="#integration-jhp-zcash">5.3 JHP Integration</a>
-                <a class="hover:text-ink" href="#monetary-design">5.4 Monetary Design</a>
+                <a class="hover:text-ink" href="#monetary-design">5.4 Stable Value</a>
                 <a class="hover:text-ink" href="#scalability-performance">5.5 Scalability</a>
               </div>
             </div>
@@ -341,7 +341,7 @@
             <div id="integration-jhp-zcash" class="rounded-2xl border border-brand-cloud/60 bg-white p-6 shadow-sm">
               <p class="text-xs font-semibold uppercase tracking-[0.2em] text-brand-lavender">5.3</p>
               <h3 class="mt-2 text-xl font-semibold text-ink">Integration of John Hancock-Style Identity with Zcash</h3>
-              <p class="mt-4 text-muted">The optimal solution is a layered architecture:</p>
+              <p class="mt-4 text-muted">While a native <a class="text-brand-denim hover:text-brand-navy" href="https://z.cash" target="_blank" rel="noopener noreferrer">Zcash</a> approach remains the preference, if authorities require digital identity, a reasonable compromise is a layered architecture:</p>
               <ul class="mt-4 space-y-3 text-muted">
                 <li><span class="font-semibold text-ink">Base Layer (Zcash):</span> Provides censorship-resistant, privacy-preserving settlement.</li>
                 <li><span class="font-semibold text-ink">Identity/Compliance Layer (JHP-style credentials):</span> Provides portable, privacy-preserving credentials and attestations for regulated entities to use for onboarding and targeted reporting.</li>
@@ -353,14 +353,56 @@
           <div class="mt-6 space-y-6">
             <div id="monetary-design" class="rounded-2xl border border-brand-cloud/60 bg-brand-ice/70 p-6">
               <p class="text-xs font-semibold uppercase tracking-[0.2em] text-brand-lavender">5.4</p>
-              <h3 class="mt-2 text-xl font-semibold text-ink">Monetary Design and Medium-of-Exchange Function</h3>
-              <p class="mt-4 text-muted">While ZEC is a floating asset, stable value can be achieved by deploying Zcash-backed or Zcash-settled stablecoins. Issuers can utilize Zcash's shielded layer for privacy and view keys for compliance, while JHP-style credentials govern issuance and redemption, leaving secondary transfers private. The key difference from DOV is that compliance is decoupled from the base-layer transaction.</p>
+              <h3 class="mt-2 text-xl font-semibold text-ink">Stable Value Through ZEC-Backed Instruments</h3>
+              <p class="mt-4 text-muted">Because ZEC is a floating-value asset, stable value can be introduced into the Zcash ecosystem through ZEC-backed stable instruments without changing the Zcash protocol or adding tokenization features on Zcash itself.</p>
+              <p class="mt-4 text-muted">A ZEC-backed stablecoin or synthetic stable asset uses ZEC as collateral, while issuance, redemption, and compliance run through an external system or regulated issuer. Zcash privacy features strengthen this model in several ways:</p>
+              <ol class="mt-4 space-y-4 list-decimal list-outside pl-5 text-muted">
+                <li>
+                  <span class="font-semibold text-ink">Shielded Collateral Management.</span>
+                  <ul class="mt-2 space-y-2 list-disc list-outside pl-5">
+                    <li>Collateral held in ZEC can reside in shielded addresses, allowing issuers, custodians, or automated systems to keep collateral positions private and limit exposure of reserve composition.</li>
+                    <li>Issuers can offer selective transparency via viewing keys (for auditors or regulators) and zero-knowledge attestations proving solvency without revealing exact values or wallet structure.</li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="font-semibold text-ink">Issuance and Redemption with JHP-Style Credentials.</span>
+                  <ul class="mt-2 space-y-2 list-disc list-outside pl-5">
+                    <li>Users provide a JHP-compliant verifiable credential during onboarding; issuers use it only for issuance/redemption decisions.</li>
+                    <li>No identity information is tied to Zcash transactions themselves, keeping compliance off the base layer.</li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="font-semibold text-ink">Transferability and Privacy.</span>
+                  <ul class="mt-2 space-y-2 list-disc list-outside pl-5">
+                    <li>Once issued, the stable instrument can circulate on whichever platform the issuer uses (public chain, private ledger, or other rails).</li>
+                    <li>Users benefit from shielded management of collateral, selective disclosure only when needed, and separation between compliance requirements and ordinary transfers.</li>
+                    <li>Zcash itself remains unchanged: it does not enforce rules, track identity, or embed AML logic.</li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="font-semibold text-ink">Practical Models Today.</span>
+                  <ul class="mt-2 space-y-2 list-disc list-outside pl-5">
+                    <li>Crypto-collateralized synthetics (e.g., DAI-style) where ZEC is locked as over-collateral and a stable unit is minted elsewhere.</li>
+                    <li>Custodial issuers that accept ZEC as reserve collateral and issue a stable token on another ledger.</li>
+                    <li>Hybrid models where institutions accept ZEC as over-collateral for credit or settlement purposes.</li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="font-semibold text-ink">Advantages Over Compliance-Embedded Models.</span>
+                  <ul class="mt-2 space-y-2 list-disc list-outside pl-5">
+                    <li>No protocol-level identity collection or global blacklist logic on-chain.</li>
+                    <li>No real-time automated surveillance or SAR generation at consensus.</li>
+                    <li>No centralized data honeypots; compliance stays an institutional responsibility, not a protocol function.</li>
+                    <li>The base layer stays private, neutral, and globally accessible while regulated entities handle targeted, auditable compliance.</li>
+                  </ul>
+                </li>
+              </ol>
             </div>
             <div id="scalability-performance" class="rounded-2xl border border-brand-cloud/60 bg-brand-ice/70 p-6">
               <p class="text-xs font-semibold uppercase tracking-[0.2em] text-brand-lavender">5.5</p>
               <h3 class="mt-2 text-xl font-semibold text-ink">Scalability and Performance</h3>
               <p class="mt-4 text-muted">Zcash has made steady progress improving shielded performance, most notably through the transition to Halo 2, which removed the need for a trusted setup and reduced proof sizes and verification overhead. These upgrades let the shielded pool operate more efficiently as usage grows.</p>
-              <p class="mt-4 text-muted">A major forward-looking improvement is Project Tachyon, an Electric Coin Company initiative to redesign Zcash network architecture for higher throughput, better fee economics, and modernized consensus operations. Tachyon proposes a modular, performance-oriented architecture that can:</p>
+              <p class="mt-4 text-muted">A major forward-looking improvement is <a class="text-brand-denim hover:text-brand-navy" href="https://seanbowe.com/blog/tachyon-scaling-zcash-oblivious-synchronization/" target="_blank" rel="noopener noreferrer">Project Tachyon</a>, spearheaded by cryptographer Sean Bowe with support from Electric Coin Company, to redesign Zcash network architecture for higher throughput, better fee economics, and modernized consensus operations. Tachyon proposes a modular, performance-oriented architecture that can:</p>
               <ul class="mt-4 space-y-3 text-muted list-disc list-outside pl-5">
                 <li><span class="font-semibold text-ink">Increase transaction throughput</span> by redesigning validation and mempool pathways.</li>
                 <li><span class="font-semibold text-ink">Improve fee efficiency</span> by reducing competition for block space and enabling more predictable economics.</li>
@@ -462,7 +504,7 @@
           <li><span class="font-semibold text-ink">Coin Center.</span> "Tear Down this Walled Garden: American Values and Digital Identity." <a class="text-brand-denim hover:text-brand-navy" href="https://www.coincenter.org/tear-down-this-walled-garden-american-values-and-digital-identity/" target="_blank" rel="noopener noreferrer">https://www.coincenter.org/tear-down-this-walled-garden-american-values-and-digital-identity/</a></li>
           <li><span class="font-semibold text-ink">Coin Center.</span> "Digital identity is broken. The tech to fix it is ready. Here's how the government can help." <a class="text-brand-denim hover:text-brand-navy" href="https://www.coincenter.org/digital-identity-is-broken-the-tech-to-fix-it-is-ready-heres-how-the-government-can-help/" target="_blank" rel="noopener noreferrer">https://www.coincenter.org/digital-identity-is-broken-the-tech-to-fix-it-is-ready-heres-how-the-government-can-help/</a></li>
           <li><span class="font-semibold text-ink">Electric Coin Company.</span> "Viewing Keys: Selective Disclosure." <a class="text-brand-denim hover:text-brand-navy" href="https://electriccoin.co/blog/viewing-keys-selective-disclosure/" target="_blank" rel="noopener noreferrer">https://electriccoin.co/blog/viewing-keys-selective-disclosure/</a></li>
-          <li><span class="font-semibold text-ink">Electric Coin Company.</span> "Tachyon: The Future of Zcash Performance." <a class="text-brand-denim hover:text-brand-navy" href="https://electriccoin.co/blog/tachyon/" target="_blank" rel="noopener noreferrer">https://electriccoin.co/blog/tachyon/</a></li>
+          <li><span class="font-semibold text-ink">Sean Bowe.</span> "Tachyon: Scaling Zcash with Oblivious Synchronization." <a class="text-brand-denim hover:text-brand-navy" href="https://seanbowe.com/blog/tachyon-scaling-zcash-oblivious-synchronization/" target="_blank" rel="noopener noreferrer">https://seanbowe.com/blog/tachyon-scaling-zcash-oblivious-synchronization/</a></li>
           <li><span class="font-semibold text-ink">GetPodcast.</span> "Why is the SEC Concerned About Privacy Now?" (Podcast episode covering SEC concerns around privacy and Zcash.) <a class="text-brand-denim hover:text-brand-navy" href="https://getpodcast.com/uk/podcast/the-breakdown-with-nlw/why-is-the-sec-concerned-about-privacy-now_ba6d1e8a7d" target="_blank" rel="noopener noreferrer">https://getpodcast.com/uk/podcast/the-breakdown-with-nlw/why-is-the-sec-concerned-about-privacy-now_ba6d1e8a7d</a></li>
           <li><span class="font-semibold text-ink">Zcash Documentation.</span> "Basics." <a class="text-brand-denim hover:text-brand-navy" href="https://z.cash/technology/" target="_blank" rel="noopener noreferrer">https://z.cash/technology/</a></li>
           <li><span class="font-semibold text-ink">Coinbase Institutional Research.</span> "Privacy Coins: Zcash." <a class="text-brand-denim hover:text-brand-navy" href="https://www.coinbase.com/institutional/research/zcash-zec" target="_blank" rel="noopener noreferrer">https://www.coinbase.com/institutional/research/zcash-zec</a></li>
